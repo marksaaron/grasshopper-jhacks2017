@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.context =this;
-        pickTime =(TimePicker)findViewById(R.id.timePicker);
         alarm_manager =(AlarmManager)getSystemService(ALARM_SERVICE);
         update_text=(TextView)findViewById(R.id.updateAlarm);
         final Calendar calendar = Calendar.getInstance();
@@ -58,12 +57,20 @@ public class MainActivity extends AppCompatActivity {
                 //int tillNext = (int)R.id.hourSchedule;
 
                 calendar.set(Calendar.HOUR_OF_DAY, tillNext);
-                calendar.set(Calendar.MINUTE, currentTime.get(Calendar.MINUTE) + 1);
+                calendar.set(Calendar.MINUTE, currentTime.get(Calendar.MINUTE)-1);
+                int hourTime = calendar.get(Calendar.HOUR_OF_DAY);
+                if(hourTime>12){
+                    hourTime -=12;
+                }
+                EditText name = (EditText) findViewById(R.id.med_name);
+                String medName = name.getText().toString();
 
-                String alarmText = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
-                set_alarm_text(alarmText);
-                pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
+                if(!name.getText().toString().equals("")) {
+                    String alarmText = "Take " + medName + " at " + hourTime + ":" + calendar.get(Calendar.MINUTE);
+                    set_alarm_text(alarmText);
+                    pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
+                }
             }
         });
         Button Restart = (Button)findViewById(R.id.restart);
@@ -83,12 +90,25 @@ public class MainActivity extends AppCompatActivity {
                                            //int tillNext = (int)R.id.hourSchedule;
 
                                            calendar.set(Calendar.HOUR_OF_DAY, tillNext);
-                                           calendar.set(Calendar.MINUTE, currentTime.get(Calendar.MINUTE) + 1);
+                                           calendar.set(Calendar.MINUTE, currentTime.get(Calendar.MINUTE)-1 );
 
                                            String alarmText = calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE);
                                            set_alarm_text(alarmText);
                                            pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
                                            alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
+                                           int hourTime = calendar.get(Calendar.HOUR_OF_DAY);
+                                           if(hourTime>12){
+                                               hourTime -=12;
+                                           }
+                                           EditText name = (EditText) findViewById(R.id.med_name);
+                                           String medName = name.getText().toString();
+
+                                           if(!name.getText().toString().equals("")) {
+                                               alarmText = "Take " + medName + " at " + hourTime + ":" + calendar.get(Calendar.MINUTE);
+                                               set_alarm_text(alarmText);
+                                               pending_intent = PendingIntent.getBroadcast(MainActivity.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                                               alarm_manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pending_intent);
+                                           }
                                        }
                                    });
         Button EndAlarm = (Button)findViewById(R.id.alarm_off);

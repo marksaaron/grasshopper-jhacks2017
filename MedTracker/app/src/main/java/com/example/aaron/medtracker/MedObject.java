@@ -53,7 +53,7 @@ public class MedObject {
         }
 
         public void setRxnormID(){
-            this.rxnormID = getId(name);
+            this.rxnormID = "";//getId(name);
         }
 
 }

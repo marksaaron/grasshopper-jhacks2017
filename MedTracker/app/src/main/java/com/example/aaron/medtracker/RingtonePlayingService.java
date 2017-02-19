@@ -35,11 +35,8 @@ public class RingtonePlayingService extends Service {
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
             Log.i("LocalService", "Received start id " + startId + ": " + intent);
-            media_song = MediaPlayer.create(this, R.raw.scifi);
+            media_song = MediaPlayer.create(this, R.raw.medsound);
             media_song.start();
-            final Intent my_intent =new Intent(this.context,MainActivity.class);
-            pending_intent = PendingIntent.getBroadcast(RingtonePlayingService.this, 0, my_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
             return START_NOT_STICKY;
         }
 
