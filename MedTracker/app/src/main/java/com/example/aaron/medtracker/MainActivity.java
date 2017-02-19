@@ -7,10 +7,19 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+<<<<<<< HEAD
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText nameTxt;
+=======
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -23,10 +32,38 @@ public class MainActivity extends AppCompatActivity {
     TextView update_text;
     Context context;
 
+>>>>>>> b36c947c18d7f8e126b4994f4357f8ab6bdc02a5
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
+
+        nameTxt = (EditText) findViewById(R.id.med_name);
+        final Button addBtn = (Button) findViewById(R.id.button1);
+
+        nameTxt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                addBtn.setEnabled(!charSequence.equals(""));
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+
+       FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         this.context =this;
